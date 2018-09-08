@@ -18,8 +18,8 @@ namespace chaiscript {
         m->add(constructor<b2Vec2(float, float)>(), "b2Vec2");
         m->add(fun(&b2Vec2::x), "x");
         m->add(fun(&b2Vec2::y), "y");
-        m->add(fun(&b2Vec2::set), "Set");
-        m->add(fun(&b2Vec2::setZero), "SetZero");
+        m->add(fun(&b2Vec2::Set), "Set");
+        m->add(fun(&b2Vec2::SetZero), "SetZero");
         m->add(fun(&b2Vec2::Length), "Length");
         m->add(fun(&b2Vec2::LengthSquared), "LengthSquared");
         m->add(fun(&b2Vec2::Normalize), "Normalize");
