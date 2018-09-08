@@ -3,3 +3,8 @@
 	url = https://github.com/erincatto/Box2D.git
 	branch = master
 	ignore = dirty
+[submodule "vendor/ChaiScript"]
+	path = vendor/ChaiScript
+	url = https://github.com/ChaiScript/ChaiScript.git
+  branch = develop
+  ignore = dirty
