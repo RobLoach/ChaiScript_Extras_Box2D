@@ -18,7 +18,7 @@ This is currently just a proof of concept. Any assistance in getting this up and
     ```
 
 3. Use Box2D in ChaiScript...
-    ```js
+    ```c
     // Define the gravity vector.
     var gravity = b2Vec2(0.0f, -10.0f)
 
