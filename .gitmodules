@@ -1,0 +1,5 @@
+[submodule "vendor/Box2D"]
+	path = vendor/Box2D
+	url = https://github.com/erincatto/Box2D.git
+	branch = master
+	ignore = dirty
