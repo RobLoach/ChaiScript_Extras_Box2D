@@ -169,20 +169,8 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${LINKER_FLAGS}")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${LINKER_FLAGS}")
 set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} ${LINKER_FLAGS}")
 
-
-
-
-# Before the move to C++17
-set(CHAISCRIPT_BRANCH ac0d7ce94925f8eac367533b276d9d7db13a77ae)
-
-file(DOWNLOAD https://github.com/ChaiScript/ChaiScript/archive/${CHAISCRIPT_BRANCH}.tar.gz "${CMAKE_BINARY_DIR}/chaiscript/chaiscript-${CHAISCRIPT_BRANCH}.tar.gz"
-  INACTIVITY_TIMEOUT 180 TIMEOUT 180 TLS_VERIFY off)
-
-execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf "${CMAKE_BINARY_DIR}/chaiscript/chaiscript-${CHAISCRIPT_BRANCH}.tar.gz" "${CMAKE_BINARY_DIR}/chaiscript"
-  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/chaiscript")
-
-include_directories("${CMAKE_BINARY_DIR}/chaiscript/ChaiScript-${CHAISCRIPT_BRANCH}/include")
-
+# ChaiScript
+include_directories( vendor/ChaiScript/include )
 
 # Add catch tests macro
 macro(ADD_CATCH_TESTS executable)
