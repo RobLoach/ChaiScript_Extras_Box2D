@@ -14,7 +14,7 @@
 TEST_CASE( "Box2D functions work", "[box2d]" ) {
 
   auto box2dlib = chaiscript::extras::box2d::bootstrap();
-  
+
   // Create the ChaiScript environment.
   chaiscript::ChaiScript chai;
 
@@ -22,8 +22,12 @@ TEST_CASE( "Box2D functions work", "[box2d]" ) {
   chai.add(box2dlib);
 
   // Define the gravity vector.
-  chai.eval(R""(
-    global gravity = b2Vec2(0.0f, -10.0f);
-  )"");
+  chai.eval("global gravity = b2Vec2(0.0f, -10.0f);");
   CHECK(chai.eval<float>("gravity.y") == -10.0f);
+
+  // Define the gravity vector.
+  chai.eval(R""(
+    global world = b2World(gravity);
+  )"");
+  CHECK(chai.eval<bool>("world.GetSubStepping") == false);
 }
