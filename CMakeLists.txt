@@ -172,7 +172,7 @@ set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} ${LINKER_FLAGS}")
 
 
 
-
+# Before the move to C++17
 set(CHAISCRIPT_BRANCH ac0d7ce94925f8eac367533b276d9d7db13a77ae)
 
 file(DOWNLOAD https://github.com/ChaiScript/ChaiScript/archive/${CHAISCRIPT_BRANCH}.tar.gz "${CMAKE_BINARY_DIR}/chaiscript/chaiscript-${CHAISCRIPT_BRANCH}.tar.gz"

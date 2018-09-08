@@ -2,6 +2,8 @@
 
 Provides [ChaiScript](https://github.com/ChaiScript/ChaiScript) bindings to [Box2D](https://github.com/erincatto/Box2D).
 
+This is a **Proof of Concept**. Any help in getting it up and running would be much appreciated.
+
 ## Usage
 
 1. Include the module source...
@@ -19,6 +21,7 @@ Provides [ChaiScript](https://github.com/ChaiScript/ChaiScript) bindings to [Box
     ```
     // TODO: Fill in the API example.
     ```
+
 ## Development
 
 ```

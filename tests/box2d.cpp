@@ -25,6 +25,5 @@ TEST_CASE( "Box2D functions work", "[box2d]" ) {
   chai.eval(R""(
     global gravity = b2Vec2(0.0f, -10.0f);
   )"");
-
-  CHECK(chai.eval<float>("map.y") == -10.0f);
+  CHECK(chai.eval<float>("gravity.y") == -10.0f);
 }
