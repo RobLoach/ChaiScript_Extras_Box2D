@@ -173,7 +173,7 @@ set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} ${LINKER_FLAGS}")
 
 
 
-set(CHAISCRIPT_BRANCH develop)
+set(CHAISCRIPT_BRANCH ac0d7ce94925f8eac367533b276d9d7db13a77ae)
 
 file(DOWNLOAD https://github.com/ChaiScript/ChaiScript/archive/${CHAISCRIPT_BRANCH}.tar.gz "${CMAKE_BINARY_DIR}/chaiscript/chaiscript-${CHAISCRIPT_BRANCH}.tar.gz"
   INACTIVITY_TIMEOUT 180 TIMEOUT 180 TLS_VERIFY off)
@@ -216,13 +216,13 @@ endmacro()
 
 file(GLOB SOURCES
   tests/box2d.cpp
-  vendor/Box2D/Box2D/Rope/*.cpp
-  vendor/Box2D/Box2D/Dynamics/*.cpp
-  vendor/Box2D/Box2D/Dynamics/Joints/*.cpp
-  vendor/Box2D/Box2D/Dynamics/Contacts/*.cpp
-  vendor/Box2D/Box2D/Common/*.cpp
   vendor/Box2D/Box2D/Collision/*.cpp
-  vendor/Box2D/Box2D/Shapes/*.cpp
+  vendor/Box2D/Box2D/Collision/Shapes/*.cpp
+  vendor/Box2D/Box2D/Common/*.cpp
+  vendor/Box2D/Box2D/Dynamics/*.cpp
+  vendor/Box2D/Box2D/Dynamics/Contacts/*.cpp
+  vendor/Box2D/Box2D/Dynamics/Joints/*.cpp
+  vendor/Box2D/Box2D/Rope/*.cpp
 )
 
 include_directories( vendor/Box2D )
