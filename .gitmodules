@@ -6,5 +6,5 @@
 [submodule "vendor/ChaiScript"]
 	path = vendor/ChaiScript
 	url = https://github.com/ChaiScript/ChaiScript.git
-  branch = develop
-  ignore = dirty
+	branch = develop
+	ignore = dirty
