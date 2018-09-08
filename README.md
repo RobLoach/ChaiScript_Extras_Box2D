@@ -1,4 +1,4 @@
-# ChaiScript Extras Box2D
+# ChaiScript Extras Box2D [![Build Status](https://travis-ci.org/RobLoach/ChaiScript_Extras_Box2D.svg?branch=master)](https://travis-ci.org/RobLoach/ChaiScript_Extras_Box2D)
 
 Provides [ChaiScript](https://github.com/ChaiScript/ChaiScript) bindings to [Box2D](https://github.com/erincatto/Box2D).
 
