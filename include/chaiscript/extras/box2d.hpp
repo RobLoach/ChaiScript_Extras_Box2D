@@ -10,6 +10,29 @@ namespace chaiscript {
     namespace box2d {
 
       /**
+       * Register a ChaiScript module with b2Body.
+       */
+      ModulePtr addb2Body(ModulePtr m = std::make_shared<Module>()) {
+        m->add(user_type<b2BodyDef>(), "b2BodyDef");
+        m->add(constructor<b2BodyDef()>(), "b2BodyDef");
+        m->add(fun(&b2BodyDef::type), "type");
+        m->add(fun(&b2BodyDef::position), "position");
+        m->add(fun(&b2BodyDef::angle), "angle");
+        m->add(fun(&b2BodyDef::linearVelocity), "linearVelocity");
+        m->add(fun(&b2BodyDef::angularVelocity), "angularVelocity");
+        m->add(fun(&b2BodyDef::linearDamping), "linearDamping");
+        m->add(fun(&b2BodyDef::angularDamping), "angularDamping");
+        m->add(fun(&b2BodyDef::allowSleep), "allowSleep");
+        m->add(fun(&b2BodyDef::awake), "awake");
+        m->add(fun(&b2BodyDef::fixedRotation), "fixedRotation");
+        m->add(fun(&b2BodyDef::bullet), "bullet");
+        m->add(fun(&b2BodyDef::active), "active");
+        m->add(fun(&b2BodyDef::gravityScale), "gravityScale");
+
+        return m;
+      }
+
+      /**
        * Register a ChaiScript module with b2Math.
        *
        * @see b2World.h
@@ -92,6 +115,7 @@ namespace chaiscript {
        */
       ModulePtr bootstrap(ModulePtr m = std::make_shared<Module>())
       {
+        addb2Body(m);
         addb2Math(m);
         addb2World(m);
 
