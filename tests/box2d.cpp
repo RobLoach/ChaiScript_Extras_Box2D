@@ -21,13 +21,25 @@ TEST_CASE( "Box2D functions work", "[box2d]" ) {
   // Add the library to the ChaiScript instance.
   chai.add(box2dlib);
 
-  // Define the gravity vector.
-  chai.eval("global gravity = b2Vec2(0.0f, -10.0f);");
+  // b2Vec2
+  chai.eval(R""(
+    // Define the gravity vector.
+    var gravity = b2Vec2(0.0f, -10.0f);
+  )"");
   CHECK(chai.eval<float>("gravity.y") == -10.0f);
 
-  // Define the gravity vector.
+  // b2World
   chai.eval(R""(
-    global world = b2World(gravity);
+    // Define the gravity vector.
+    var world = b2World(gravity);
   )"");
   CHECK(chai.eval<bool>("world.GetSubStepping") == false);
+
+  // b2BodyDef
+  chai.eval(R""(
+    // Define the ground body.
+    var groundBodyDef = b2BodyDef()
+    groundBodyDef.position.Set(0.0f, -10.0f)
+  )"");
+  CHECK(chai.eval<bool>("groundBodyDef.awake") == true);
 }
