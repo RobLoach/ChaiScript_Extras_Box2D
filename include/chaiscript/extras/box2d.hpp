@@ -13,6 +13,7 @@ namespace chaiscript {
        * Register a ChaiScript module with b2Body.
        */
       ModulePtr addb2Body(ModulePtr m = std::make_shared<Module>()) {
+        // b2BodyDef
         m->add(user_type<b2BodyDef>(), "b2BodyDef");
         m->add(constructor<b2BodyDef()>(), "b2BodyDef");
         m->add(fun(&b2BodyDef::type), "type");
@@ -29,6 +30,68 @@ namespace chaiscript {
         m->add(fun(&b2BodyDef::active), "active");
         m->add(fun(&b2BodyDef::gravityScale), "gravityScale");
 
+        // b2Body
+        m->add(user_type<b2Body>(), "b2Body");
+        m->add(fun<b2Fixture*, b2Body, const b2FixtureDef*>(&b2Body::CreateFixture), "CreateFixture");
+        m->add(fun<b2Fixture*, b2Body, const b2Shape*, float>(&b2Body::CreateFixture), "CreateFixture");
+        m->add(fun(&b2Body::DestroyFixture), "DestroyFixture");
+        m->add(fun(&b2Body::SetTransform), "SetTransform");
+        m->add(fun(&b2Body::GetTransform), "GetTransform");
+        m->add(fun(&b2Body::GetPosition), "GetPosition");
+        m->add(fun(&b2Body::GetAngle), "GetAngle");
+        m->add(fun(&b2Body::GetWorldCenter), "GetWorldCenter");
+        m->add(fun(&b2Body::GetLocalCenter), "GetLocalCenter");
+        m->add(fun(&b2Body::SetLinearVelocity), "SetLinearVelocity");
+        m->add(fun(&b2Body::GetLinearVelocity), "GetLinearVelocity");
+        m->add(fun(&b2Body::SetAngularVelocity), "SetAngularVelocity");
+        m->add(fun(&b2Body::GetAngularVelocity), "GetAngularVelocity");
+        m->add(fun(&b2Body::ApplyForce), "ApplyForce");
+        m->add(fun(&b2Body::ApplyForceToCenter), "ApplyForceToCenter");
+        m->add(fun(&b2Body::ApplyTorque), "ApplyTorque");
+        m->add(fun(&b2Body::ApplyLinearImpulse), "ApplyLinearImpulse");
+        m->add(fun(&b2Body::ApplyLinearImpulseToCenter), "ApplyLinearImpulseToCenter");
+        m->add(fun(&b2Body::ApplyAngularImpulse), "ApplyAngularImpulse");
+        m->add(fun(&b2Body::GetMass), "GetMass");
+        m->add(fun(&b2Body::GetInertia), "GetInertia");
+        m->add(fun(&b2Body::GetMassData), "GetMassData");
+        m->add(fun(&b2Body::SetMassData), "SetMassData");
+        m->add(fun(&b2Body::ResetMassData), "ResetMassData");
+        m->add(fun(&b2Body::GetWorldPoint), "GetWorldPoint");
+        m->add(fun(&b2Body::GetWorldVector), "GetWorldVector");
+        m->add(fun(&b2Body::GetLocalPoint), "GetLocalPoint");
+        m->add(fun(&b2Body::GetLocalVector), "GetLocalVector");
+        m->add(fun(&b2Body::GetLinearVelocityFromWorldPoint), "GetLinearVelocityFromWorldPoint");
+        m->add(fun(&b2Body::GetLinearVelocityFromLocalPoint), "GetLinearVelocityFromLocalPoint");
+        m->add(fun(&b2Body::GetLinearDamping), "GetLinearDamping");
+        m->add(fun(&b2Body::SetLinearDamping), "SetLinearDamping");
+        m->add(fun(&b2Body::GetAngularDamping), "GetAngularDamping");
+        m->add(fun(&b2Body::SetAngularDamping), "SetAngularDamping");
+        m->add(fun(&b2Body::GetGravityScale), "GetGravityScale");
+        m->add(fun(&b2Body::SetGravityScale), "SetGravityScale");
+        m->add(fun(&b2Body::SetType), "SetType");
+        m->add(fun(&b2Body::GetType), "GetType");
+        m->add(fun(&b2Body::SetBullet), "SetBullet");
+        m->add(fun(&b2Body::IsBullet), "IsBullet");
+        m->add(fun(&b2Body::SetSleepingAllowed), "SetSleepingAllowed");
+        m->add(fun(&b2Body::IsSleepingAllowed), "IsSleepingAllowed");
+        m->add(fun(&b2Body::SetAwake), "SetAwake");
+        m->add(fun(&b2Body::IsAwake), "IsAwake");
+        m->add(fun(&b2Body::SetActive), "SetActive");
+        m->add(fun(&b2Body::IsActive), "IsActive");
+        m->add(fun(&b2Body::SetFixedRotation), "SetFixedRotation");
+        m->add(fun(&b2Body::IsFixedRotation), "IsFixedRotation");
+        m->add(fun<b2Fixture*, b2Body>(&b2Body::GetFixtureList), "GetFixtureList");
+        m->add(fun<b2JointEdge*, b2Body>(&b2Body::GetJointList), "GetJointList");
+        m->add(fun<b2ContactEdge*, b2Body>(&b2Body::GetContactList), "GetContactList");
+        m->add(fun<b2Body*, b2Body>(&b2Body::GetNext), "GetNext");
+        /*
+        TODO: Figure out a way to pass void* as an argument through ChaiScript.
+        m->add(fun(&b2Body::GetUserData), "GetUserData");
+        m->add(fun(&b2Body::SetUserData), "SetUserData");
+        */
+        m->add(fun<b2World*, b2Body>(&b2Body::GetWorld), "GetWorld");
+        m->add(fun(&b2Body::Dump), "Dump");
+
         return m;
       }
 
@@ -38,6 +101,7 @@ namespace chaiscript {
        * @see b2World.h
        */
       ModulePtr addb2World(ModulePtr m = std::make_shared<Module>()) {
+        // b2World
         m->add(user_type<b2World>(), "b2World");
         m->add(constructor<b2World(const b2Vec2&)>(), "b2World");
         m->add(fun(&b2World::SetDestructionListener), "SetDestructionListener");
