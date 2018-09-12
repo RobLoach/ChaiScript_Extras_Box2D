@@ -52,4 +52,13 @@ TEST_CASE( "Box2D functions work", "[box2d]" ) {
   )"");
   CHECK(chai.eval<bool>("groundBody.IsBullet()") == false);
 
+  // b2PolygonShape
+  chai.eval(R""(
+    // Define the ground box shape.
+    var groundBox = b2PolygonShape()
+
+    // The extents are the half-widths of the box.
+    groundBox.SetAsBox(50.0f, 10.0f)
+  )"");
+  CHECK(chai.eval<bool>("groundBox.Validate()") == true);
 }
