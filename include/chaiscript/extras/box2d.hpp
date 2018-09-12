@@ -96,6 +96,30 @@ namespace chaiscript {
       }
 
       /**
+       * Register a ChaiScript module with b2PolygonShape.
+       *
+       * @see b2PolygonShape.h
+       */
+      ModulePtr addb2PolygonShape(ModulePtr m = std::make_shared<Module>()) {
+        // b2PolygonShape
+        m->add(user_type<b2PolygonShape>(), "b2PolygonShape");
+        m->add(constructor<b2PolygonShape()>(), "b2PolygonShape");
+        m->add(fun(&b2PolygonShape::GetChildCount), "GetChildCount");
+        m->add(fun(&b2PolygonShape::Set), "Set");
+        // TODO: Add b2BlockAllocator and b2PolygonShape::Clone
+        //b2Shape* Clone(b2BlockAllocator* allocator) const override;
+        m->add(fun<void, b2PolygonShape, float, float>(&b2PolygonShape::SetAsBox), "SetAsBox");
+        m->add(fun<void, b2PolygonShape, float, float, const b2Vec2&, float>(&b2PolygonShape::SetAsBox), "SetAsBox");
+        m->add(fun(&b2PolygonShape::TestPoint), "TestPoint");
+        m->add(fun(&b2PolygonShape::RayCast), "RayCast");
+        m->add(fun(&b2PolygonShape::ComputeAABB), "ComputeAABB");
+        m->add(fun(&b2PolygonShape::ComputeMass), "ComputeMass");
+        m->add(fun(&b2PolygonShape::Validate), "Validate");
+
+        return m;
+      }
+
+      /**
        * Register a ChaiScript module with b2Math.
        *
        * @see b2World.h
@@ -182,6 +206,7 @@ namespace chaiscript {
         addb2Body(m);
         addb2Math(m);
         addb2World(m);
+        addb2PolygonShape(m);
 
         return m;
       }
