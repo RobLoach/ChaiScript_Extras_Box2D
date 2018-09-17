@@ -34,8 +34,6 @@ namespace chaiscript {
         m->add(user_type<b2Body>(), "b2Body");
         m->add(fun<b2Fixture*, b2Body, const b2FixtureDef*>(&b2Body::CreateFixture), "CreateFixture");
         m->add(fun<b2Fixture*, b2Body, const b2Shape*, float>(&b2Body::CreateFixture), "CreateFixture");
-
-
         m->add(fun(&b2Body::DestroyFixture), "DestroyFixture");
         m->add(fun(&b2Body::SetTransform), "SetTransform");
         m->add(fun(&b2Body::GetTransform), "GetTransform");
@@ -122,7 +120,19 @@ namespace chaiscript {
         return m;
       }
 
+      /**
+       * Register a ChaiScript module with b2Fixture.
+       *
+       * @see b2Fixture.h
+       */
       ModulePtr addb2Fixture(ModulePtr m = std::make_shared<Module>()) {
+        // b2Filter
+        m->add(user_type<b2Filter>(), "b2Filter");
+        m->add(constructor<b2Filter()>(), "b2Filter");
+        m->add(fun(&b2Filter::categoryBits), "categoryBits");
+        m->add(fun(&b2Filter::maskBits), "maskBits");
+        m->add(fun(&b2Filter::groupIndex), "groupIndex");
+
         // b2FixtureDef
         m->add(user_type<b2FixtureDef>(), "b2FixtureDef");
         m->add(constructor<b2FixtureDef()>(), "b2FixtureDef");
@@ -133,12 +143,12 @@ namespace chaiscript {
         m->add(fun(&b2FixtureDef::isSensor), "isSensor");
         m->add(fun(&b2FixtureDef::filter), "filter");
 
-        // b2Filter
-        m->add(user_type<b2Filter>(), "b2Filter");
-        m->add(constructor<b2Filter()>(), "b2Filter");
-        m->add(fun(&b2Filter::categoryBits), "categoryBits");
-        m->add(fun(&b2Filter::maskBits), "maskBits");
-        m->add(fun(&b2Filter::groupIndex), "groupIndex");
+        // b2FixtureProxy
+        m->add(user_type<b2FixtureProxy>(), "b2FixtureProxy");
+        m->add(fun(&b2FixtureProxy::aabb), "aabb");
+        m->add(fun(&b2FixtureProxy::fixture), "fixture");
+        m->add(fun(&b2FixtureProxy::childIndex), "childIndex");
+        m->add(fun(&b2FixtureProxy::proxyId), "proxyId");
 
         // b2Fixture
         m->add(user_type<b2Fixture>(), "b2Fixture");
