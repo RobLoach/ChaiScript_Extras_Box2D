@@ -61,4 +61,11 @@ TEST_CASE( "Box2D functions work", "[box2d]" ) {
     groundBox.SetAsBox(50.0f, 10.0f)
   )"");
   CHECK(chai.eval<bool>("groundBox.Validate()") == true);
+
+  // b2Fixture
+  chai.eval(R""(
+    // Add the ground fixture to the ground body.
+    var newFixture = groundBody.CreateFixture(groundBox, 0.0f)
+  )"");
+  CHECK(chai.eval<float>("newFixture.GetDensity()") == 0.0f);
 }
