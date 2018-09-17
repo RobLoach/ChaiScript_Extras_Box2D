@@ -34,6 +34,8 @@ namespace chaiscript {
         m->add(user_type<b2Body>(), "b2Body");
         m->add(fun<b2Fixture*, b2Body, const b2FixtureDef*>(&b2Body::CreateFixture), "CreateFixture");
         m->add(fun<b2Fixture*, b2Body, const b2Shape*, float>(&b2Body::CreateFixture), "CreateFixture");
+
+
         m->add(fun(&b2Body::DestroyFixture), "DestroyFixture");
         m->add(fun(&b2Body::SetTransform), "SetTransform");
         m->add(fun(&b2Body::GetTransform), "GetTransform");
@@ -103,6 +105,7 @@ namespace chaiscript {
       ModulePtr addb2PolygonShape(ModulePtr m = std::make_shared<Module>()) {
         // b2PolygonShape
         m->add(user_type<b2PolygonShape>(), "b2PolygonShape");
+        m->add(chaiscript::base_class<b2Shape, b2PolygonShape>());
         m->add(constructor<b2PolygonShape()>(), "b2PolygonShape");
         m->add(fun(&b2PolygonShape::GetChildCount), "GetChildCount");
         m->add(fun(&b2PolygonShape::Set), "Set");
