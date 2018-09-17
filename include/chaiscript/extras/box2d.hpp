@@ -119,6 +119,52 @@ namespace chaiscript {
         return m;
       }
 
+      ModulePtr addb2Fixture(ModulePtr m = std::make_shared<Module>()) {
+        // b2FixtureDef
+        m->add(user_type<b2FixtureDef>(), "b2FixtureDef");
+        m->add(constructor<b2FixtureDef()>(), "b2FixtureDef");
+        m->add(fun(&b2FixtureDef::shape), "shape");
+        m->add(fun(&b2FixtureDef::friction), "friction");
+        m->add(fun(&b2FixtureDef::restitution), "restitution");
+        m->add(fun(&b2FixtureDef::density), "density");
+        m->add(fun(&b2FixtureDef::isSensor), "isSensor");
+        m->add(fun(&b2FixtureDef::filter), "filter");
+
+        // b2Filter
+        m->add(user_type<b2Filter>(), "b2Filter");
+        m->add(constructor<b2Filter()>(), "b2Filter");
+        m->add(fun(&b2Filter::categoryBits), "categoryBits");
+        m->add(fun(&b2Filter::maskBits), "maskBits");
+        m->add(fun(&b2Filter::groupIndex), "groupIndex");
+
+        // b2Fixture
+        m->add(user_type<b2Fixture>(), "b2Fixture");
+        m->add(fun(&b2Fixture::GetType), "GetType");
+        m->add(fun<b2Shape*, b2Fixture>(&b2Fixture::GetShape), "GetShape");
+        m->add(fun(&b2Fixture::SetSensor), "SetSensor");
+        m->add(fun(&b2Fixture::IsSensor), "IsSensor");
+        m->add(fun(&b2Fixture::SetFilterData), "SetFilterData");
+        m->add(fun(&b2Fixture::GetFilterData), "GetFilterData");
+        m->add(fun(&b2Fixture::Refilter), "Refilter");
+        m->add(fun<b2Body*, b2Fixture>(&b2Fixture::GetBody), "GetBody");
+        m->add(fun<b2Fixture*, b2Fixture>(&b2Fixture::GetNext), "GetNext");
+        //m->add(fun(&b2Fixture::GetUserData), "GetUserData");
+        //m->add(fun(&b2Fixture::SetUserData), "SetUserData");
+        m->add(fun(&b2Fixture::TestPoint), "TestPoint");
+        m->add(fun(&b2Fixture::RayCast), "RayCast");
+        m->add(fun(&b2Fixture::GetMassData), "GetMassData");
+        m->add(fun(&b2Fixture::SetDensity), "SetDensity");
+        m->add(fun(&b2Fixture::GetDensity), "GetDensity");
+        m->add(fun(&b2Fixture::GetFriction), "GetFriction");
+        m->add(fun(&b2Fixture::SetFriction), "SetFriction");
+        m->add(fun(&b2Fixture::GetRestitution), "GetRestitution");
+        m->add(fun(&b2Fixture::SetRestitution), "SetRestitution");
+        m->add(fun(&b2Fixture::GetAABB), "GetAABB");
+        m->add(fun(&b2Fixture::Dump), "Dump");
+
+        return m;
+      }
+
       /**
        * Register a ChaiScript module with b2Math.
        *
@@ -204,9 +250,10 @@ namespace chaiscript {
       ModulePtr bootstrap(ModulePtr m = std::make_shared<Module>())
       {
         addb2Body(m);
-        addb2Math(m);
-        addb2World(m);
         addb2PolygonShape(m);
+        addb2Fixture(m);
+        addb2World(m);
+        addb2Math(m);
 
         return m;
       }
