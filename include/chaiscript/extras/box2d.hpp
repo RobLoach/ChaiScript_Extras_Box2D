@@ -13,6 +13,13 @@ namespace chaiscript {
        * Register a ChaiScript module with b2Body.
        */
       ModulePtr addb2Body(ModulePtr m = std::make_shared<Module>()) {
+
+        // b2BodyType
+        m->add(chaiscript::type_conversion<b2BodyType, int>());
+        m->add_global_const(const_var(static_cast<int>(b2_staticBody)), "b2_staticBody");
+        m->add_global_const(const_var(static_cast<int>(b2_kinematicBody)), "b2_kinematicBody");
+        m->add_global_const(const_var(static_cast<int>(b2_dynamicBody)), "b2_dynamicBody");
+
         // b2BodyDef
         m->add(user_type<b2BodyDef>(), "b2BodyDef");
         m->add(constructor<b2BodyDef()>(), "b2BodyDef");
