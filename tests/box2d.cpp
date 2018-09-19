@@ -68,4 +68,15 @@ TEST_CASE( "Box2D functions work", "[box2d]" ) {
     var newFixture = groundBody.CreateFixture(groundBox, 0.0f)
   )"");
   CHECK(chai.eval<float>("newFixture.GetDensity()") == 0.0f);
+
+  // b2BodyType
+  chai.eval(R""(
+    // Define the dynamic body. We set its position and call the body factory.
+    var bodyDef = b2BodyDef()
+    bodyDef.type = b2_dynamicBody
+    bodyDef.position.Set(0.0f, 4.0f)
+    //var body = world.CreateBody(bodyDef)
+  )"");
+  CHECK(chai.eval<b2BodyType>("bodyDef.type") == b2_dynamicBody);
+
 }
