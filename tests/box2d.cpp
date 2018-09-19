@@ -75,8 +75,25 @@ TEST_CASE( "Box2D functions work", "[box2d]" ) {
     var bodyDef = b2BodyDef()
     bodyDef.type = b2_dynamicBody
     bodyDef.position.Set(0.0f, 4.0f)
-    //var body = world.CreateBody(bodyDef)
+    var body = world.CreateBody(bodyDef)
   )"");
   CHECK(chai.eval<b2BodyType>("bodyDef.type") == b2_dynamicBody);
+
+  // b2PolygonShape
+  chai.eval(R""(
+    // Define another box shape for our dynamic body.
+    var dynamicBox = b2PolygonShape()
+    dynamicBox.SetAsBox(1.0f, 1.0f)
+  )"");
+  CHECK(chai.eval<int>("dynamicBox.GetChildCount") == 1);
+
+  // b2FixtureDef
+  chai.eval(R""(
+    // Define the dynamic body fixture.
+    var fixtureDef = b2FixtureDef()
+    // TODO: Figure out "Error, cannot assign to temporary value."
+    //fixtureDef.shape = dynamicBox
+  )"");
+  CHECK(chai.eval<float>("fixtureDef.restitution") == 0.0f);
 
 }
