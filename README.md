@@ -55,7 +55,8 @@ This is currently just a proof of concept. Any assistance in getting this up and
 
     // Define the dynamic body fixture.
     var fixtureDef = b2FixtureDef()
-    fixtureDef.shape = dynamicBox
+    //fixtureDef.shape = dynamicBox
+    SetShape(fixtureDef, dynamicBox)
 
     // Set the box density to be non-zero, so it will be dynamic.
     fixtureDef.density = 1.0f
