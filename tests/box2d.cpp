@@ -91,9 +91,50 @@ TEST_CASE( "Box2D functions work", "[box2d]" ) {
   chai.eval(R""(
     // Define the dynamic body fixture.
     var fixtureDef = b2FixtureDef()
+
     // TODO: Figure out "Error, cannot assign to temporary value."
     //fixtureDef.shape = dynamicBox
-  )"");
-  CHECK(chai.eval<float>("fixtureDef.restitution") == 0.0f);
+    SetShape(fixtureDef, dynamicBox)
 
+    // Set the box density to be non-zero, so it will be dynamic.
+    fixtureDef.density = 1.0f
+
+    // Override the default friction.
+    fixtureDef.friction = 0.3f
+  )"");
+  CHECK(chai.eval<float>("fixtureDef.friction") == 0.3f);
+
+  // b2Fixture
+  chai.eval(R""(
+    // Add the shape to the body.
+    var createdFixture = body.CreateFixture(fixtureDef)
+  )"");
+  CHECK(chai.eval<float>("createdFixture.GetDensity()") == 1.0f);
+
+
+  // Test
+  chai.eval(R""(
+    // Prepare for simulation. Typically we use a time step of 1/60 of a
+    // second (60Hz) and 10 iterations. This provides a high quality simulation
+    // in most game scenarios.
+    var timeStep = 1.0f / 60.0f
+    var velocityIterations = 6
+    var positionIterations = 2
+
+    // This is our little game loop.
+    for (var i = 0; i < 60; ++i) {
+        // Instruct the world to perform a single step of simulation.
+        // It is generally best to keep the time step and iterations fixed.
+        world.Step(timeStep, velocityIterations, positionIterations)
+
+        // Now print the position and angle of the body.
+        var position = body.GetPosition()
+        var angle = body.GetAngle()
+
+        print("X: " + to_string(position.x))
+        print("Y: " + to_string(position.y))
+        print("A: " + to_string(angle))
+        print("----")
+    }
+  )"");
 }

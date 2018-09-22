@@ -153,6 +153,10 @@ namespace chaiscript {
         m->add(fun(&b2FixtureDef::density), "density");
         m->add(fun(&b2FixtureDef::isSensor), "isSensor");
         m->add(fun(&b2FixtureDef::filter), "filter");
+        // TODO: Figure out assignment of b2FixtureDef::shape.
+        m->add(fun([](b2FixtureDef* f, b2Shape* s) {
+          f->shape = s;
+        }), "SetShape");
 
         // b2FixtureProxy
         m->add(user_type<b2FixtureProxy>(), "b2FixtureProxy");
