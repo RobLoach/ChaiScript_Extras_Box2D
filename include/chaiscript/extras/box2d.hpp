@@ -31,8 +31,8 @@ namespace chaiscript {
 
         // b2Draw
         m->add(user_type<b2Draw>(), "b2Draw");
-        m->add(constructor<b2Draw()>(), "b2Draw");
-        m->add(fun(&b2Draw::Set), "Set");
+        // m->add(constructor<b2Draw()>(), "b2Draw");
+        m->add(fun(&b2Draw::SetFlags), "Set");
         m->add(fun(&b2Draw::GetFlags), "GetFlags");
         m->add(fun(&b2Draw::AppendFlags), "AppendFlags");
         m->add(fun(&b2Draw::ClearFlags), "ClearFlags");
@@ -43,6 +43,19 @@ namespace chaiscript {
         m->add(fun(&b2Draw::DrawSegment), "DrawSegment");
         m->add(fun(&b2Draw::DrawTransform), "DrawTransform");
         m->add(fun(&b2Draw::DrawPoint), "DrawPoint");
+      }
+
+      /**
+       * Register a ChaiScript module with b2Timer.
+       *
+       * @see b2Timer.h
+       */
+      ModulePtr addb2Timer(ModulePtr m = std::make_shared<Module>()) {
+        // b2Timer
+        m->add(user_type<b2Timer>(), "b2Timer");
+        m->add(constructor<b2Timer()>(), "b2Timer");
+        m->add(fun(&b2Timer::Reset), "Reset");
+        m->add(fun(&b2Timer::GetMilliseconds), "GetMilliseconds");
       }
 
       /**
@@ -131,11 +144,9 @@ namespace chaiscript {
         m->add(fun<b2JointEdge*, b2Body>(&b2Body::GetJointList), "GetJointList");
         m->add(fun<b2ContactEdge*, b2Body>(&b2Body::GetContactList), "GetContactList");
         m->add(fun<b2Body*, b2Body>(&b2Body::GetNext), "GetNext");
-        /*
-        TODO: Figure out a way to pass void* as an argument through ChaiScript.
-        m->add(fun(&b2Body::GetUserData), "GetUserData");
-        m->add(fun(&b2Body::SetUserData), "SetUserData");
-        */
+        // TODO: Figure out a way to pass void* as an argument through ChaiScript.
+        // m->add(fun(&b2Body::GetUserData), "GetUserData");
+        // m->add(fun(&b2Body::SetUserData), "SetUserData");
         m->add(fun<b2World*, b2Body>(&b2Body::GetWorld), "GetWorld");
         m->add(fun(&b2Body::Dump), "Dump");
 
@@ -292,6 +303,7 @@ namespace chaiscript {
        * Register a ChaiScript module with b2Math.
        */
       ModulePtr addb2Math(ModulePtr m = std::make_shared<Module>()) {
+        // b2Vec2
         m->add(user_type<b2Vec2>(), "b2Vec2");
         m->add(constructor<b2Vec2()>(), "b2Vec2");
         m->add(constructor<b2Vec2(float, float)>(), "b2Vec2");
@@ -304,6 +316,68 @@ namespace chaiscript {
         m->add(fun(&b2Vec2::Normalize), "Normalize");
         m->add(fun(&b2Vec2::IsValid), "IsValid");
         m->add(fun(&b2Vec2::Skew), "Skew");
+
+        // b2Vec3
+        m->add(user_type<b2Vec3>(), "b2Vec3");
+        m->add(constructor<b2Vec3()>(), "b2Vec3");
+        m->add(constructor<b2Vec3(float, float, float)>(), "b2Vec3");
+        m->add(fun(&b2Vec3::x), "x");
+        m->add(fun(&b2Vec3::y), "y");
+        m->add(fun(&b2Vec3::z), "z");
+        m->add(fun(&b2Vec3::Set), "Set");
+        m->add(fun(&b2Vec3::SetZero), "SetZero");
+
+        // b2Mat22
+        m->add(user_type<b2Mat22>(), "b2Mat22");
+        m->add(constructor<b2Mat22()>(), "b2Mat22");
+        m->add(constructor<b2Mat22(float, float, float, float)>(), "b2Mat22");
+        m->add(constructor<b2Mat22(const b2Vec2&, const b2Vec2&)>(), "b2Mat22");
+        m->add(fun(&b2Mat22::ex), "ex");
+        m->add(fun(&b2Mat22::ey), "ey");
+        m->add(fun(&b2Mat22::Set), "Set");
+        m->add(fun(&b2Mat22::SetIdentity), "SetIdentity");
+        m->add(fun(&b2Mat22::SetZero), "SetZero");
+        m->add(fun(&b2Mat22::GetInverse), "GetInverse");
+        m->add(fun(&b2Mat22::Solve), "Solve");
+
+        // b2Mat33
+        m->add(user_type<b2Mat33>(), "b2Mat33");
+        m->add(constructor<b2Mat33()>(), "b2Mat33");
+        m->add(constructor<b2Mat33(const b2Vec3&, const b2Vec3&, const b2Vec3&)>(), "b2Mat33");
+        m->add(fun(&b2Mat33::ex), "ex");
+        m->add(fun(&b2Mat33::ey), "ey");
+        m->add(fun(&b2Mat33::ez), "ez");
+        m->add(fun(&b2Mat33::SetZero), "SetZero");
+        m->add(fun(&b2Mat33::Solve33), "Solve33");
+        m->add(fun(&b2Mat33::Solve22), "Solve22");
+        m->add(fun(&b2Mat33::GetInverse22), "GetInverse22");
+        m->add(fun(&b2Mat33::GetSymInverse33), "GetSymInverse33");
+
+        // b2Rot
+        m->add(user_type<b2Rot>(), "b2Rot");
+        m->add(constructor<b2Rot()>(), "b2Rot");
+        m->add(constructor<b2Rot(float)>(), "b2Rot");
+        m->add(fun(&b2Rot::s), "s");
+        m->add(fun(&b2Rot::c), "c");
+        m->add(fun(&b2Rot::SetIdentity), "SetIdentity");
+        m->add(fun(&b2Rot::GetAngle), "GetAngle");
+        m->add(fun(&b2Rot::GetXAxis), "GetXAxis");
+        m->add(fun(&b2Rot::GetYAxis), "GetYAxis");
+
+        // b2Transform
+        m->add(user_type<b2Transform>(), "b2Transform");
+        m->add(constructor<b2Transform()>(), "b2Transform");
+        m->add(constructor<b2Transform(const b2Vec2&, const b2Rot&)>(), "b2Transform");
+        m->add(fun(&b2Transform::p), "p");
+        m->add(fun(&b2Transform::q), "q");
+        m->add(fun(&b2Transform::SetIdentity), "SetIdentity");
+        m->add(fun(&b2Transform::Set), "Set");
+
+        // b2Sweep
+        m->add(user_type<b2Sweep>(), "b2Sweep");
+        m->add(fun(&b2Sweep::GetTransform), "GetTransform");
+        m->add(fun(&b2Sweep::Advance), "Advance");
+        m->add(fun(&b2Sweep::Normalize), "Normalize");
 
         return m;
       }
@@ -320,6 +394,7 @@ namespace chaiscript {
         addb2Fixture(m);
         addb2World(m);
         addb2Math(m);
+        addb2Timer(m);
 
         return m;
       }
