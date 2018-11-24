@@ -10,6 +10,42 @@ namespace chaiscript {
     namespace box2d {
 
       /**
+       * Register a ChaiScript module with b2BlockAllocator.
+       */
+      ModulePtr addb2BlockAllocator(ModulePtr m = std::make_shared<Module>()) {
+        // b2BlockAllocator
+        m->add(user_type<b2BlockAllocator>(), "b2BlockAllocator");
+        m->add(constructor<b2BlockAllocator()>(), "b2BlockAllocator");
+        m->add(fun(&b2BlockAllocator::Clear), "Clear");
+      }
+
+      /**
+       * Register a ChaiScript module with b2Draw.
+       */
+      ModulePtr addb2Draw(ModulePtr m = std::make_shared<Module>()) {
+        // b2Color
+        m->add(user_type<b2Color>(), "b2Color");
+        m->add(constructor<b2Color()>(), "b2Color");
+        m->add(constructor<b2Color(float, float, float, float)>(), "b2Color");
+        m->add(fun(&b2Color::Set), "Set");
+
+        // b2Draw
+        m->add(user_type<b2Draw>(), "b2Draw");
+        m->add(constructor<b2Draw()>(), "b2Draw");
+        m->add(fun(&b2Draw::Set), "Set");
+        m->add(fun(&b2Draw::GetFlags), "GetFlags");
+        m->add(fun(&b2Draw::AppendFlags), "AppendFlags");
+        m->add(fun(&b2Draw::ClearFlags), "ClearFlags");
+        m->add(fun(&b2Draw::DrawPolygon), "DrawPolygon");
+        m->add(fun(&b2Draw::DrawSolidPolygon), "DrawSolidPolygon");
+        m->add(fun(&b2Draw::DrawCircle), "DrawCircle");
+        m->add(fun(&b2Draw::DrawSolidCircle), "DrawSolidCircle");
+        m->add(fun(&b2Draw::DrawSegment), "DrawSegment");
+        m->add(fun(&b2Draw::DrawTransform), "DrawTransform");
+        m->add(fun(&b2Draw::DrawPoint), "DrawPoint");
+      }
+
+      /**
        * Register a ChaiScript module with b2Body.
        */
       ModulePtr addb2Body(ModulePtr m = std::make_shared<Module>()) {
@@ -277,6 +313,8 @@ namespace chaiscript {
        */
       ModulePtr bootstrap(ModulePtr m = std::make_shared<Module>())
       {
+        addb2BlockAllocator(m);
+        addb2Draw(m);
         addb2Body(m);
         addb2PolygonShape(m);
         addb2Fixture(m);
