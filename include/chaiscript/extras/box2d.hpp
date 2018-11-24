@@ -17,6 +17,8 @@ namespace chaiscript {
         m->add(user_type<b2BlockAllocator>(), "b2BlockAllocator");
         m->add(constructor<b2BlockAllocator()>(), "b2BlockAllocator");
         m->add(fun(&b2BlockAllocator::Clear), "Clear");
+
+        return m;
       }
 
       /**
@@ -43,6 +45,8 @@ namespace chaiscript {
         m->add(fun(&b2Draw::DrawSegment), "DrawSegment");
         m->add(fun(&b2Draw::DrawTransform), "DrawTransform");
         m->add(fun(&b2Draw::DrawPoint), "DrawPoint");
+
+        return m;
       }
 
       /**
@@ -56,6 +60,8 @@ namespace chaiscript {
         m->add(constructor<b2Timer()>(), "b2Timer");
         m->add(fun(&b2Timer::Reset), "Reset");
         m->add(fun(&b2Timer::GetMilliseconds), "GetMilliseconds");
+
+        return m;
       }
 
       /**
