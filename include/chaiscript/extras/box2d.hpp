@@ -50,6 +50,24 @@ namespace chaiscript {
       }
 
       /**
+       * Register a ChaiScript module with b2StackAllocator.
+       */
+      ModulePtr addb2StackAllocator(ModulePtr m = std::make_shared<Module>()) {
+        // b2StackEntry
+        m->add(user_type<b2StackEntry>(), "b2StackEntry");
+        m->add(fun(&b2StackEntry::data), "data");
+        m->add(fun(&b2StackEntry::size), "size");
+        m->add(fun(&b2StackEntry::usedMalloc), "usedMalloc");
+
+        // b2StackAllocator
+        m->add(user_type<b2StackAllocator>(), "b2StackAllocator");
+        m->add(constructor<b2StackAllocator()>(), "b2StackAllocator");
+        m->add(fun(&b2StackAllocator::GetMaxAllocation), "GetMaxAllocation");
+
+        return m;
+      }
+
+      /**
        * Register a ChaiScript module with b2Timer.
        *
        * @see b2Timer.h
@@ -396,6 +414,7 @@ namespace chaiscript {
         addb2BlockAllocator(m);
         addb2Draw(m);
         addb2Body(m);
+        addb2StackAllocator(m);
         addb2PolygonShape(m);
         addb2Fixture(m);
         addb2World(m);
