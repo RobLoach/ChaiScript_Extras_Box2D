@@ -178,6 +178,20 @@ namespace chaiscript {
       }
 
       /**
+       * Register a ChaiScript module with b2ContactManager.
+       *
+       * @see b2ContactManager.h
+       */
+      ModulePtr addb2ContactManager(ModulePtr m = std::make_shared<Module>()) {
+        m->add(user_type<b2ContactManager>(), "b2ContactManager");
+        m->add(constructor<b2ContactManager()>(), "b2ContactManager");
+        m->add(fun(&b2ContactManager::FindNewContacts), "FindNewContacts");
+        m->add(fun(&b2ContactManager::Collide), "Collide");
+
+        return m;
+      }
+
+      /**
        * Register a ChaiScript module with b2PolygonShape.
        *
        * @see b2PolygonShape.h
@@ -420,6 +434,7 @@ namespace chaiscript {
         addb2World(m);
         addb2Math(m);
         addb2Timer(m);
+        addb2ContactManager(m);
 
         return m;
       }
